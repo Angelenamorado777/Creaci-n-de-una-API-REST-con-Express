@@ -30,6 +30,21 @@ app.get('/books/:id', (req, res) => {
   }
 
 });
+
+// Creacion de Post/Agregar un Nuevo Libro
+
+
+app.post('/books', (req, res) => {
+
+const Nuevolibro = req.body;
+books.push(Nuevolibro);
+
+ res.status(201).json({status: 201,message: 'El libro se agrego exitosamente.', data: Nuevolibro});
+
+
+});
+
+
 //**
 // #3 Definición PUT /api/books/:id: Actualizar un libro existente.
 //  */
@@ -63,6 +78,8 @@ app.put('/books/:id', (req, res) => {
   }
 });
 
+
 app.listen(port, () => {
   console.log(`El servidor está escuchando en http://localhost:${port}`);
 }); 
+
