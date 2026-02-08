@@ -7,6 +7,30 @@ app.use(express.json());
 let books = require('./books.json');
 
 //**
+// 1 Creacion de GET
+// */
+
+app.get('/books', (req, res) => {
+  res.json({ status: 200, message: 'Encontrados con exito', data: books });
+});
+
+//**
+// Get por Id
+// */
+
+app.get('/books/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  let book = books.find(c => c.id === id);
+  
+  if (book) {
+    res.json({ status: 200, message: 'ID encontrado', data: book});
+  }
+  else {
+    res.json({ status: 404, message: 'ID no encontrado', data: book});
+  }
+
+});
+//**
 // #3 Definición PUT /api/books/:id: Actualizar un libro existente.
 //  */
 app.put('/books/:id', (req, res) => {
