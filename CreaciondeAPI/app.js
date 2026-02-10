@@ -87,7 +87,7 @@ app.listen(port, () => {
 // #4 DELETE /api/books/:id: Eliminar un libro por su ID.
 //  */
 
-app.delete('/api/books/:id', (req, res) => {
+app.delete('/books/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
   const bookIndex = books.findIndex(book => book.id === id);
@@ -98,9 +98,12 @@ app.delete('/api/books/:id', (req, res) => {
     });
   }
 
-  books.splice(bookIndex, 1);
+  const libroEliminado = books[bookIndex];
 
-  res.json({
-    message: 'Libro eliminado correctamente'
-  });
+  res.status(200).json({
+  status: 200,
+   message: 'Libro eliminado correctamente',
+    data: libroEliminado
+    });
+
 });
