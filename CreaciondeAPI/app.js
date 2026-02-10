@@ -83,3 +83,24 @@ app.listen(port, () => {
   console.log(`El servidor está escuchando en http://localhost:${port}`);
 }); 
 
+//**
+// #4 DELETE /api/books/:id: Eliminar un libro por su ID.
+//  */
+
+app.delete('/api/books/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const bookIndex = books.findIndex(book => book.id === id);
+
+  if (bookIndex === -1) {
+    return res.status(404).json({
+      message: 'Libro no encontrado'
+    });
+  }
+
+  books.splice(bookIndex, 1);
+
+  res.json({
+    message: 'Libro eliminado correctamente'
+  });
+});
